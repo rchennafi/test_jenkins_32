@@ -2,12 +2,14 @@ pipeline {
     agent { label 'master' }
 
     options {
+        skipDefaultCheckout()
         timestamps()
     }
 
     stages {
         stage('print changes') {
             steps {
+                githubCheckoutTest(branch: "main", repo: "git@github.com:rchennafi/test_jenkins_32.git")
                 script {
                     def changeLogSets = currentBuild.changeSets
                     echo("changeSets=" + changeLogSets)
@@ -24,13 +26,6 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-
-        stage('checkquit') {
-            steps {
-                shouldTrigger()
-                echo "NOPE!"
             }
         }
     }
