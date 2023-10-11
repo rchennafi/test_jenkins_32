@@ -22,6 +22,7 @@ pipeline {
                             currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
                             sleep(1)
                         }
+                    }
                 }
             }
         }
