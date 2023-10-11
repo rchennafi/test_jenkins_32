@@ -7,6 +7,12 @@ pipeline {
     }
 
     stages {
+        stage('print changes') {
+            steps {
+                echo currentBuild.changeSets
+            }
+        }
+
         stage('checkquit') {
             when { changeset "*"} {
                 not {
@@ -14,11 +20,8 @@ pipeline {
                         if ("SUCCESS".equals(currentBuild.previousBuild.result)) {
                             echo "WOW!"
                             currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-                            sleep(1)   // Interrupt is not blocking and does not take effect immediately.
-                        } else {
-                            echo "NO!"
+                            sleep(1)
                         }
-                    }
                 }
             }
         }
