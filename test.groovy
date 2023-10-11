@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('print changes') {
             steps {
+                echo "changes:"
                 echo currentBuild.changeSets
             }
         }
@@ -16,14 +17,12 @@ pipeline {
         stage('checkquit') {
             when { changeset "*"} {
                 not {
-                    steps {
-                        if ("SUCCESS".equals(currentBuild.previousBuild.result)) {
-                            echo "WOW!"
-                            currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-                            sleep(1)
-                        }
-                    }
+                    shouldTrigger(currentBuild)
                 }
+            }
+
+            steps {
+                echo "I QUIT!"
             }
         }
     }
