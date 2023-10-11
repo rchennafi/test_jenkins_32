@@ -2,6 +2,7 @@ pipeline {
     agent { label 'master' }
 
     options {
+        skipDefaultCheckout()
         timestamps()
     }
 
@@ -41,6 +42,12 @@ pipeline {
                     sleep(1)
                 }
             }
+        }
+    }
+
+    post {
+        cleanup {
+            cleanWs deleteDirs: true
         }
     }
 }
