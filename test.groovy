@@ -15,14 +15,16 @@ pipeline {
         }
 
         stage('checkquit') {
-            when { changeset "*"} {
+            when {
                 not {
-                    shouldTrigger(currentBuild)
+                    changeset "*"
                 }
             }
 
             steps {
                 echo "I QUIT!"
+                currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+                sleep(1)
             }
         }
     }
