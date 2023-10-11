@@ -28,18 +28,9 @@ pipeline {
         }
 
         stage('checkquit') {
-            when {
-                not {
-                    changeset "*"
-                }
-            }
-
             steps {
-                echo "I QUIT!"
-                script {
-                    currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-                    sleep(1)
-                }
+                shouldTrigger()
+                echo "NOPE!"
             }
         }
     }
