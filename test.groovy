@@ -13,6 +13,8 @@ pipeline {
                     steps {
                         if ("SUCCESS".equals(currentBuild.previousBuild.result)) {
                             echo "WOW!"
+                        } else {
+                            echo "NO!"
                         }
                     }
                 }
