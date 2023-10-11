@@ -23,8 +23,10 @@ pipeline {
 
             steps {
                 echo "I QUIT!"
-                currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-                sleep(1)
+                script {
+                    currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+                    sleep(1)
+                }
             }
         }
     }
