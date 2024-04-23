@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('print changes') {
             steps {
-                gitCheckoutTest(branch: "main", repo: "git@github.com:rchennafi/test_jenkins_32.git")
+                gitCheckout(branch: "main", repo: "git@github.com:rchennafi/test_jenkins_32.git")
             }
         }
     }
